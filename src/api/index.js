@@ -10,20 +10,19 @@ export const fetchData = async (country) => {
   }
 
   try {
-    const { data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(changeableUrl);
+    const { data: { cases, recovered, deaths, updated } } = await axios.get(changeableUrl);
 
-    return { confirmed, recovered, deaths, lastUpdate };
+    return { active: cases, recovered, deaths, updated };
   } catch (error) {
     return error;
   }
 };
 
-
 export const fetchDailyData = async () => {
   try {
     const { data } = await axios.get('https://corona.lmao.ninja/v2/historical');
 
-    return data.map(({ positive, recovered, death, dateChecked: date }) => ({ confirmed: positive, recovered, deaths: death, date }));
+    return data.map(({ cases, recovered, deaths }) => ({ confirmed: cases, recovered, deaths }));
   } catch (error) {
     return error;
   }
@@ -31,9 +30,9 @@ export const fetchDailyData = async () => {
 
 export const fetchCountries = async () => {
   try {
-    const { data: { countries } } = await axios.get('https://corona.lmao.ninja/v2/countries/:country');
+    const { data: { countries } } = await axios.get('https://corona.lmao.ninja/v2/countries');
 
-    return countries.map((country) => country.name);
+    return countries.map((country) => country.country);
   } catch (error) {
     return error;
   }

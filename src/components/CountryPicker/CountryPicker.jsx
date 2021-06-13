@@ -10,7 +10,7 @@ const Countries = ({ handleCountryChange }) => {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      setCountries(await fetchCountries());
+      setCountries(await fetchCountries().country);
     };
 
     fetchAPI();
@@ -20,7 +20,7 @@ const Countries = ({ handleCountryChange }) => {
     <FormControl className={styles.formControl}>
       <NativeSelect defaultValue="" onChange={(e) => handleCountryChange(e.target.value)}>
         <option value="">United States</option>
-        {countries.map((country, i) => <option key={i} value={country.country}>{country}</option>)}
+        {countries.map((country, i) => <option key={i} value={country}>{country}</option>)}
       </NativeSelect>
     </FormControl>
   );
