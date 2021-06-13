@@ -32,7 +32,7 @@ export const fetchCountries = async () => {
   try {
     const { data: { countries } } = await axios.get('https://corona.lmao.ninja/v2/countries');
 
-    return countries.map((country) => country.country);
+    return countries.map((country) => country);
   } catch (error) {
     return error;
   }
